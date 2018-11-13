@@ -1,0 +1,26 @@
+{
+  "name": "stackoverflow-style-questions-answers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BijayPuma/StackOverflow-style-questions-answers.git"
+  },
+  "author": "Bijay Rai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BijayPuma/StackOverflow-style-questions-answers/issues"
+  },
+  "homepage": "https://github.com/BijayPuma/StackOverflow-style-questions-answers#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.3.12"
+  }
+}
