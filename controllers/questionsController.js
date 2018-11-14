@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const Questions = require("../models/questionModel");
+// const express = require("express");
+// const router = express.Router();
+// const Questions = require("../models/questionModel");
 
-// });
+// // });
 
 // router.get("/", (req, res) => {
 //   res.redirect("/questions");
@@ -49,4 +49,4 @@ const Questions = require("../models/questionModel");
 //   });
 // });
 
-module.exports = router;
+// module.exports = router;

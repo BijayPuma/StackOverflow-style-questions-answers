@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 //connect to Mongoose
 mongoose
   .connect(
-    "mongodb://localhost/videoLab",
+    "mongodb://localhost/questionanswer",
     {
       useMongoClient: true
     }
@@ -19,7 +19,7 @@ mongoose
 
 //Load Idea Model
 require("./models/questionModel");
-const Idea = mongoose.model("ideas");
+const Idea = mongoose.model("questions");
 
 //Handlebars middleware
 app.engine(
