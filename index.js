@@ -19,7 +19,7 @@ mongoose
 
 //Load Idea Model
 require("./models/questionModel");
-const Idea = mongoose.model("questions");
+const Question = mongoose.model("questions");
 
 //Handlebars middleware
 app.engine(
@@ -39,6 +39,11 @@ app.get("/about", (req, res) => {
   res.render("about", {
     title: title
   });
+});
+
+//Add Idea Form
+app.get("/questions/addquestions", (req, res) => {
+  res.render("./questions/addquestions");
 });
 
 app.listen(3000, () => {
