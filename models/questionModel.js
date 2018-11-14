@@ -1,19 +1,19 @@
 const mongoose = require("../db/connection");
 const Schema = mongoose.Schema;
 
-const QuestionsSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  answered: Boolean,
-  answers: {
-    type: Schema.Types.ObjectId,
-    ref: "Answers"
+const QuestionSchema = new Schema({
+  title: {
+    type: String,
+    required: true
   },
-  createdAt: {
+  details: {
+    type: String,
+    required: true
+  },
+  date: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   }
 });
 
-const Questions = mongoose.model("Questions", QuestionsSchema);
-module.exports = Questions;
+mongoose.model("question", QuestionSchema);

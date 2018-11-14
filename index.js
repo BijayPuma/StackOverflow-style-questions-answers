@@ -1,6 +1,25 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const mongoose = require("mongoose");
+
 const app = express();
+
+mongoose.Promise = global.Promise;
+
+//connect to Mongoose
+mongoose
+  .connect(
+    "mongodb://localhost/videoLab",
+    {
+      useMongoClient: true
+    }
+  )
+  .then(() => console.log("MongoDB Connected.."))
+  .catch(err => console.log(err));
+
+//Load Idea Model
+require("./models/questionModel");
+const Idea = mongoose.model("ideas");
 
 //Handlebars middleware
 app.engine(
