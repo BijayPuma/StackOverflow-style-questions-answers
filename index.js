@@ -7,7 +7,7 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 
-//connect to Mongoose
+// //connect to Mongoose
 mongoose
   .connect(
     "mongodb://localhost/questionsAnswers",
@@ -19,6 +19,7 @@ mongoose
   .catch(err => console.log(err));
 
 //Load Question Model
+
 require("./models/Questions");
 const Question = mongoose.model("questions");
 
@@ -62,17 +63,6 @@ app.get("/questions/addquestions", (req, res) => {
   res.render("questions/addquestions");
 });
 
-//Edit Question Form
-app.get("/questions/edit/:id", (req, res) => {
-  Question.findOne({
-    _id: req.params.id
-  }).then(question => {
-    res.render("./questions/edit", {
-      quesiton: question
-    });
-  });
-});
-
 //Process Form
 app.post("/questions", (req, res) => {
   Question.create({
@@ -85,6 +75,14 @@ app.post("/questions", (req, res) => {
     .catch(err => {
       console.log(err);
     });
+});
+//Edit Question Form
+app.get("/questions/edit/:id", (req, res) => {
+  Question.findOne({
+    _id: req.params.id
+  }).then(question => {
+    res.render("./questions/edit", quesiton);
+  });
 });
 
 //Edit Form Process
@@ -102,9 +100,9 @@ app.put("/questions/:id", (req, res) => {
 });
 
 //Delete Question
-app.delete("/questions/:id", (req, res) => {
-  Question.remove({ _id: req.params.id }).then(() => {
-    res.redirect("/questions");
+app.get("/questions/delete/:id", (req, res) => {
+  Question.findOneAndDelete({ _id: req.params.id }).then(() => {
+    res.redirect("/");
   });
 });
 

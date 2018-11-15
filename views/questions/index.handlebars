@@ -3,12 +3,9 @@
     <h4>{{title}}</h4>
     <p>{{question}}</p>
     <a class='btn btn-dark btn-block mb-2' href='/questions/edit/{{id}}'>Edit</a>
-    <form method='post' action='/questions/{{id}}?
-    _method=DELETE'>
-        <input type='hidden' name="_method" value="DELETE">
-        <input type='submit' class='btn btn-danger
-         btn-block' value="Delete">
-    </form>
+    <a class='btn btn-dark btn-block mb-2' href='/questions/delete/{{id}}'>Delete</a>
+
+
 </div> {{else}} <p>No questions posted</p>
 
 {{/each}}
