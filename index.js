@@ -2,10 +2,13 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 const app = express();
 
 mongoose.Promise = global.Promise;
+
+app.use(methodOverride("_method"));
 
 // //connect to Mongoose
 mongoose
@@ -87,7 +90,7 @@ app.get("/questions/edit/:id", (req, res) => {
 });
 
 //Update Question
-app.post("/questions/update/:id", (req, res) => {
+app.put("/questions/update/:id", (req, res) => {
   Question.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true
   }).then(question => {
@@ -102,6 +105,8 @@ app.get("/questions/delete/:id", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(`Server started on port 3000`);
+app.set("port", process.env.PORT || 3000);
+
+app.listen(app.get("port"), () => {
+  console.log(`✅ PORT: ${app.get("port")} 🌟`);
 });
