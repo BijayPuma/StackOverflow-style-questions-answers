@@ -1,15 +1,15 @@
 <div class="card card-body">
     <h3>Edit Question</h3>
-    <form action="/questions/edit/{{this.id}}?_method=PUT" method="post">
-        <input type="hidden" name="_method" value="PUT">
+    <form action="/questions/update/{{this.id}}?_method=put" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" value="{{this.title}}" required>
+            <input type="text" value="{{this.title}}" name="title" class="form-control" id="" required />
         </div>
         <div class="form-group">
             <label for="question">Question</label>
-            <textarea class="form-control" name="question" required>{{this.question}}</textarea>
+            <textarea class="form-control" name="question" id="" required>{{this.question}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <button type="submit" class="btn btn-primary" value="Update">Submit</button>
     </form>
 </div>

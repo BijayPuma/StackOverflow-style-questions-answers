@@ -76,26 +76,22 @@ app.post("/questions", (req, res) => {
       console.log(err);
     });
 });
+
 //Edit Question Form
 app.get("/questions/edit/:id", (req, res) => {
   Question.findOne({
     _id: req.params.id
-  }).then(question => {
-    res.render("./questions/edit", quesiton);
+  }).then(edit => {
+    res.render("./questions/edit", edit);
   });
 });
 
-//Edit Form Process
-app.put("/questions/:id", (req, res) => {
-  Question.findOne({
-    _id: req.params.id
-  }).then(idea => {
-    //new values
-    question.title = req.body.title;
-    question.question = req.body.question;
-    question.save().then(question => {
-      res.redirect("/questions");
-    });
+//Update Question
+app.post("/questions/update/:id", (req, res) => {
+  Question.findOneAndUpdate({ _id: req.params.id }, req.body, {
+    new: true
+  }).then(question => {
+    res.redirect("/questions");
   });
 });
 
