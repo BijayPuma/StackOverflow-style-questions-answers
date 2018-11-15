@@ -1,24 +1,24 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
+
+//body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 mongoose.Promise = global.Promise;
 
 //connect to Mongoose
 mongoose
-  .connect(
-    "mongodb://localhost/questionanswer",
-    {
-      useMongoClient: true
-    }
-  )
+  .connect("mongodb://localhost/questionsAnswers")
   .then(() => console.log("MongoDB Connected.."))
   .catch(err => console.log(err));
 
-//Load Idea Model
-require("./models/questionModel");
+//Load Question Model
+require("./models/questions");
 const Question = mongoose.model("questions");
 
 //Handlebars middleware
@@ -34,51 +34,35 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 app.get("/about", (req, res) => {
-  const title = "Bijay";
-
-  res.render("about", {
-    title: title
-  });
+  res.render("about");
 });
 
-//Add Idea Form
+//Questions index Page where your question will be posted
+app.get("/questions/index", (req, res) => {
+  Question.find({})
+    .sort({ date: "desc" })
+    .then(questions => {
+      res.render("./questions/index", {
+        questions: questions
+      });
+    });
+});
+
+//Add Question Form
 app.get("/questions/addquestions", (req, res) => {
   res.render("./questions/addquestions");
+});
+
+//Post Process Form
+app.post("/questions", (req, res) => {
+  Question.create({
+    title: req.body.title,
+    question: req.body.question
+  }).then(ideas => {
+    res.redirect("./questions/index");
+  });
 });
 
 app.listen(3000, () => {
   console.log(`Server started on port 3000`);
 });
-
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const methodOverride = require("method-override");
-// // hbs.registerPartials(__dirname + "/views/partials");
-
-// const QA = require("./controllers/questionsController");
-
-// // const app = express();
-// // app.use(methodOverride("_method"));
-
-// // app.use(bodyParser.urlencoded({ extended: true }));
-
-// // app.set("view engine", "hbs");
-
-// // app.use("/", QA);
-
-// app.set("view engine", "hbs");
-
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
-// app.get("/about", (req, res) => {
-//   const title = "Bijay";
-
-//   res.render("about", {
-//     title: title
-//   });
-// });
-
-// app.listen(3000, () => {
-//   console.log("App is running");
-// });

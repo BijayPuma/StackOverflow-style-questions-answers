@@ -6,7 +6,7 @@ const QuestionSchema = new Schema({
     type: String,
     required: true
   },
-  details: {
+  question: {
     type: String,
     required: true
   },
