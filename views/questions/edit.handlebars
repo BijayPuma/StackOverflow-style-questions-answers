@@ -1,0 +1,17 @@
+<div class='card card-body'>
+    <h3>Edit Question</h3>
+    <form action='/questions' method='post'>
+
+        <div class='form-group'>
+            <label for='title'>Title</label>
+            <input type='text' class='form-control' name='title' value="{{question.title}}" required>
+
+        </div>
+
+        <div class="form-group">
+            <label for="question">Question</label>
+            <textarea class="form-control" name="question" required>{{question.question}}</textarea>
+        </div>
+        <button type='submit' class='btn btn-primary'>Submit</button>
+    </form>
+</div>
