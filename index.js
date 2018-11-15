@@ -22,7 +22,7 @@ mongoose
 require("./models/Questions");
 const Question = mongoose.model("questions");
 
-//Handlebars middleware
+// Handlebars middleware
 app.engine(
   "handlebars",
   exphbs({
@@ -53,9 +53,7 @@ app.get("/about", (req, res) => {
 //Questions index Page where your question will be posted
 app.get("/questions", (req, res) => {
   Question.find({}).then(questions => {
-    res.render("./questions/index", {
-      questions: questions
-    });
+    res.render("./questions/index", { questions });
   });
 });
 
@@ -79,10 +77,14 @@ app.get("/questions/edit/:id", (req, res) => {
 app.post("/questions", (req, res) => {
   Question.create({
     title: req.body.title,
-    question: req.body.question
-  }).then(ideas => {
-    res.redirect("./questions/index");
-  });
+    question: req.body.questions
+  })
+    .then(ideas => {
+      res.redirect("/questions");
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 //Edit Form Process
