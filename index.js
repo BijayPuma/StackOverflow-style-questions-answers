@@ -21,10 +21,10 @@ app.use(methodOverride("_method"));
 
 mongoose
   .connect(
-    "mongodb://localhost/questionsAnswers",
-    {
-      useMongoClient: true
-    }
+    "mongodb://localhost/questionsAnswers"
+    // {
+    //   useMongoClient: true
+    // }
   )
   .then(() => console.log("MongoDB Connected.."))
   .catch(err => console.log(err));
@@ -54,4 +54,4 @@ app.listen(app.get("port"), () => {
   console.log(`✅ PORT: ${app.get("port")} 🌟`);
 });
 
-//heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questionsanswers
+// heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questionsanswers
