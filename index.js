@@ -3,19 +3,21 @@ const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-
 const app = express();
+
+//Load Routes
+const Questions = require("./controllers/questions");
+
+//body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//method override middleware
+app.use(methodOverride("_method"));
 
 mongoose.Promise = global.Promise;
 
 app.use(methodOverride("_method"));
-
-// //connect to Mongoose
-if (process.env.NODE_ENV == "production") {
-  mongoose.connect(process.env.MLAB_URL);
-} else {
-  mongoose.connect("mongodb://localhost/questionsAnswers");
-}
 
 mongoose
   .connect(
@@ -27,10 +29,12 @@ mongoose
   .then(() => console.log("MongoDB Connected.."))
   .catch(err => console.log(err));
 
-//Load Question Model
-
-require("./models/Questions");
-const Question = mongoose.model("questions");
+// //connect to Mongoose
+if (process.env.NODE_ENV == "production") {
+  mongoose.connect(process.env.MLAB_URL);
+} else {
+  mongoose.connect("mongodb://localhost/questionsAnswers");
+}
 
 // Handlebars middleware
 app.engine(
@@ -42,74 +46,7 @@ app.engine(
 
 app.set("view engine", "handlebars");
 
-//body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-//Index Route
-app.get("/", (req, res) => {
-  const title = "Welcome";
-
-  res.render("index", {
-    title: title
-  });
-});
-
-//About Route
-app.get("/about", (req, res) => {
-  res.render("about");
-});
-
-//Questions index Page where your question will be posted
-app.get("/questions", (req, res) => {
-  Question.find({}).then(questions => {
-    res.render("./questions/index", { questions });
-  });
-});
-
-//Add Question Form
-app.get("/questions/addquestions", (req, res) => {
-  res.render("questions/addquestions");
-});
-
-//Process Form
-app.post("/questions", (req, res) => {
-  Question.create({
-    title: req.body.title,
-    question: req.body.questions
-  })
-    .then(ideas => {
-      res.redirect("/questions");
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-//Edit Question Form
-app.get("/questions/edit/:id", (req, res) => {
-  Question.findOne({
-    _id: req.params.id
-  }).then(edit => {
-    res.render("./questions/edit", edit);
-  });
-});
-
-//Update Question
-app.put("/questions/update/:id", (req, res) => {
-  Question.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true
-  }).then(question => {
-    res.redirect("/questions");
-  });
-});
-
-//Delete Question
-app.get("/questions/delete/:id", (req, res) => {
-  Question.findOneAndDelete({ _id: req.params.id }).then(() => {
-    res.redirect("/");
-  });
-});
+app.use("/", Questions);
 
 app.set("port", process.env.PORT || 3000);
 
