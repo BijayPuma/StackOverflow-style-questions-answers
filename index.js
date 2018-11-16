@@ -17,8 +17,6 @@ app.use(methodOverride("_method"));
 
 mongoose.Promise = global.Promise;
 
-app.use(methodOverride("_method"));
-
 // //connect to Mongoose
 if (process.env.NODE_ENV == "production") {
   mongoose.connect(process.env.mlab);
