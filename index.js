@@ -1,8 +1,8 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+
 const app = express();
 
 //Load Routes
@@ -14,15 +14,6 @@ app.use(bodyParser.json());
 
 //method override middleware
 app.use(methodOverride("_method"));
-
-mongoose.Promise = global.Promise;
-
-// //connect to Mongoose
-if (process.env.NODE_ENV == "production") {
-  mongoose.connect(process.env.mlab);
-} else {
-  mongoose.connect("mongodb://localhost/questionsAnswers");
-}
 
 // Handlebars middleware
 app.engine(

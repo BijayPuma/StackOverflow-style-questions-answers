@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("../db/connection");
 
 const Schema = mongoose.Schema;
 
@@ -18,7 +18,8 @@ const QuestionSchema = new Schema({
   }
 });
 
-mongoose.model("questions", QuestionSchema);
+const questions = mongoose.model("questions", QuestionSchema);
 
+module.exports = questions;
 
 // $ heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questionsanswers

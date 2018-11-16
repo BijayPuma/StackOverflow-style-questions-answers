@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 //Load Question model
-require("../models/Questions");
-const Question = mongoose.model("questions");
+const Question = require("../models/Questions");
+// const Question = mongoose.model("questions");
 
 //Index Route
 router.get("/", (req, res) => {
