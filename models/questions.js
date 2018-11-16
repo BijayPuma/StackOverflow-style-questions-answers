@@ -18,8 +18,8 @@ const QuestionSchema = new Schema({
   }
 });
 
-const questions = mongoose.model("questions", QuestionSchema);
+const QuestionsModel = mongoose.model("QuestionsModel", QuestionSchema);
 
-module.exports = questions;
+module.exports = QuestionsModel;
 
 // $ heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questionsanswers

@@ -3,7 +3,7 @@ const router = express.Router();
 // const mongoose = require("mongoose");
 
 //Load Question model
-const Question = require("../models/Questions");
+const QuestionsModel = require("../models/Questions");
 // const Question = mongoose.model("questions");
 
 //Index Route
@@ -22,7 +22,7 @@ router.get("/about", (req, res) => {
 
 //Questions index Page where your question will be posted
 router.get("/questions", (req, res) => {
-  Question.find({}).then(questions => {
+  QuestionsModel.find({}).then(questions => {
     res.render("./questions/index", { questions });
   });
 });
@@ -34,7 +34,7 @@ router.get("/questions/addquestions", (req, res) => {
 
 //Process Form
 router.post("/questions", (req, res) => {
-  Question.create({
+  QuestionsModel.create({
     title: req.body.title,
     question: req.body.questions
   })
@@ -48,7 +48,7 @@ router.post("/questions", (req, res) => {
 
 //Edit Question Form
 router.get("/questions/edit/:id", (req, res) => {
-  Question.findOne({
+  QuestionsModel.findOne({
     _id: req.params.id
   }).then(edit => {
     res.render("./questions/edit", edit);
@@ -57,7 +57,7 @@ router.get("/questions/edit/:id", (req, res) => {
 
 //Update Question
 router.put("/questions/update/:id", (req, res) => {
-  Question.findOneAndUpdate({ _id: req.params.id }, req.body, {
+  QuestionsModel.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true
   }).then(question => {
     res.redirect("/questions");
@@ -66,7 +66,7 @@ router.put("/questions/update/:id", (req, res) => {
 
 //Delete Question
 router.get("/questions/delete/:id", (req, res) => {
-  Question.findOneAndDelete({ _id: req.params.id }).then(() => {
+  QuestionsModel.findOneAndDelete({ _id: req.params.id }).then(() => {
     res.redirect("/");
   });
 });
