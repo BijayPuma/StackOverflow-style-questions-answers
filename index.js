@@ -54,4 +54,8 @@ app.listen(app.get("port"), () => {
   console.log(`✅ PORT: ${app.get("port")} 🌟`);
 });
 
-// heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questionsanswers
+// heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questions-answers1
+
+//heroku create questions-answers1
+
+// mongo ds161856.mlab.com:61856/questionsanswers -u questionsanswers -p bijayrai1
