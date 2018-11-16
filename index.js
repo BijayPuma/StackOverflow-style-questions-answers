@@ -19,16 +19,6 @@ mongoose.Promise = global.Promise;
 
 app.use(methodOverride("_method"));
 
-mongoose
-  .connect(
-    "mongodb://localhost/questionsAnswers"
-    // {
-    //   useMongoClient: true
-    // }
-  )
-  .then(() => console.log("MongoDB Connected.."))
-  .catch(err => console.log(err));
-
 // //connect to Mongoose
 if (process.env.NODE_ENV == "production") {
   mongoose.connect(process.env.MLAB_URL);
