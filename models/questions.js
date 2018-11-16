@@ -19,3 +19,6 @@ const QuestionSchema = new Schema({
 });
 
 mongoose.model("questions", QuestionSchema);
+
+
+// $ heroku config:set MLAB_URL=mongodb://questionsanswers:bijayrai1@ds161856.mlab.com:61856/questionsanswers
